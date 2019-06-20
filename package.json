@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "flow-cli": "0.0.0-pre",
+    "g": "^2.0.1",
+    "immutable": "^4.0.0-rc.12",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-redux": "^7.1.0",
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.1",
+    "redux-saga": "^1.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,5 +33,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "husky": "^2.4.1",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2"
   }
 }
