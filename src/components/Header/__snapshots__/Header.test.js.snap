@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component should render correctly 1`] = `
+<header
+  className="header"
+>
+  <span
+    className="title"
+  >
+    React Card Game
+  </span>
+</header>
+`;

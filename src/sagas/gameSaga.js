@@ -2,22 +2,20 @@
 import { call, select, put, takeLatest } from "redux-saga/effects";
 import { get } from "immutable";
 
-import { actions, list, types } from "../reducers/cityListReducer";
-import data from "../data/apiResponse.json";
-import cityListMapper from "../helpers/cityListMapper";
+import { actions, types } from "../reducers/gameReducer";
 
-async function listApiCall() {
-  return {
-    data
-  };
+export function* setUsername({ username }) {
+  console.log("Params", username);
+  try {
+    yield put(actions.setUserName(username));
+  } catch (error) {
+
+  }
 }
 
 export function* getList() {
   try {
-    const payload = yield call(listApiCall);
-    if (payload) {
-      yield put(actions.listLoadSuccess(payload));
-    }
+    yield put(actions.listLoadSuccess());
   } catch (error) {
     yield put(actions.listLoadError(error));
   }
@@ -33,5 +31,6 @@ export function* removeItem() {
 
 export default [
   takeLatest(types.LIST_LOADING, getList),
-  takeLatest(types.REMOVE_ITEM_LOADING, removeItem)
+  takeLatest(types.REMOVE_ITEM_LOADING, removeItem),
+  takeLatest(types.SET_USERNAME, setUsername)
 ];
