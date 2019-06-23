@@ -1,12 +1,14 @@
 import { fromJS } from "immutable";
 import { createSelector } from "reselect";
 
+import { cardGenerator } from "../helpers/cardGenerator";
+
 export const types = {
   SET_USERNAME: "SET_USERNAME",
 
-  LIST_LOADING: "LIST_LOADING",
-  LIST_LOAD_SUCCESS: "LIST_LOAD_SUCCESS",
-  LIST_LOAD_ERROR: "LIST_LOAD_ERROR",
+  TURN_CARD: "TURN_CARD",
+  TURN_CARD_SUCCESS: "TURN_CARD_SUCCESS",
+  TURN_CARD_ERROR: "TURN_CARD_ERROR",
 
   REMOVE_ITEM_LOADING: "REMOVE_ITEM_LOADING",
   REMOVE_ITEM_SUCCESS: "REMOVE_ITEM_LOAD_SUCCESS",
@@ -16,30 +18,34 @@ export const types = {
 export const actions = {
   setUserName: username => ({ type: types.SET_USERNAME, username }),
 
-  listLoading: () => ({ type: types.LIST_LOADING }),
-  listLoadSuccess: payload => ({ type: types.LIST_LOAD_SUCCESS, payload }),
-  listLoadError: error => ({ type: types.LIST_LOAD_ERROR, error }),
+  turnCard: () => ({ type: types.TURN_CARD }),
+  turnCardSuccess: payload => ({ type: types.TURN_CARD_SUCCESS, payload }),
+  turnCardError: error => ({ type: types.TURN_CARD_ERROR, error }),
 
   removeItemLoading: cityID => ({ type: types.REMOVE_ITEM_LOADING, cityID }),
   removeItemSuccess: payload => ({ type: types.REMOVE_ITEM_SUCCESS, payload }),
   removeItemError: error => ({ type: types.REMOVE_ITEM_ERROR, error })
 };
 
+const cards = cardGenerator();
+
+console.log("CARDS", cards);
+
 const initialState = fromJS({
-  username: null,
+  username: "",
   score: 0,
-  data: [],
+  cards: cards,
   error: null,
   loading: false
 });
 
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.LIST_LOADING:
+    case types.TURN_CARD:
       return state.set("loading", fromJS(true));
-    case types.LIST_LOAD_SUCCESS:
+    case types.TURN_CARD_SUCCESS:
       return state.set("data", fromJS(action.payload)).set("loading", false);
-    case types.LIST_LOAD_ERROR:
+    case types.TURN_CARD_ERROR:
       return state.set("error", fromJS(action.error)).set("loading", false);
     case types.REMOVE_ITEM_SUCCESS:
       return state.set("data", fromJS(action.payload));
@@ -52,11 +58,11 @@ const gameReducer = (state = initialState, action) => {
   }
 };
 
-export const list = state => state.list;
+export const game = state => state.game;
 
-export const makeSelectList = () =>
+export const makeSelectGameData = () =>
   createSelector(
-    list,
+    game,
     substate => substate.toJS()
   );
 

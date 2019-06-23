@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import InputField from "../../components/InputField";
 
 import styles from "./Home.module.scss";
-import { actions } from "../../reducers/gameReducer";
+import {actions, makeSelectGameData} from "../../reducers/gameReducer";
 
 class Home extends Component {
   state = {
@@ -19,15 +19,17 @@ class Home extends Component {
 
   startGame = () => {
     console.log("Clicked");
-    const { setUsername } = this.props;
+    const { setUser, history: { push } } = this.props;
     const { username } = this.state;
 
     if (username && username.length > 0) {
-      setUsername(username);
+      setUser(username);
+      push('/game');
     }
   };
 
   render() {
+    console.log("PROPS", this.props);
     return (
       <>
         <Header />
@@ -47,10 +49,16 @@ class Home extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = () => {
   return {
-    setUsername: username => dispatch(actions.setUserName(username))
+    cards: makeSelectGameData()
   };
 };
 
-export default connect(null, mapDispatchToProps)(Home);
+const mapDispatchToProps = dispatch => {
+  return {
+    setUser: username => dispatch(actions.setUserName(username))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
