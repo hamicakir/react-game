@@ -1,11 +1,22 @@
 .item {
-  flex: 1 0 25%; /* explanation below */
+  flex: 1 0 24%; /* explanation below */
   height: 170px;
   margin: 5px auto;
   display: inline-block;
 
-  img {
+  .flipped {
+    width: 100%;
+    height: 100%;
+    margin: auto 2px;
+    background-color: #282c34;
+  }
+
+  img.active {
     display: block;
     margin: 0 auto;
+  }
+
+  img.passive {
+    display: none;
   }
 }

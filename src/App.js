@@ -10,11 +10,9 @@ function App() {
     <BrowserRouter>
       <Provider store={store}>
         <Switch>
-          <Suspense fallback={<div>Loading...</div>}>
-            {routes.map(route => (
-              <Route {...route} />
-            ))}
-          </Suspense>
+          {routes.map(route => (
+            <Route {...route} />
+          ))}
         </Switch>
       </Provider>
     </BrowserRouter>

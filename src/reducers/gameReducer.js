@@ -18,7 +18,7 @@ export const types = {
 export const actions = {
   setUserName: username => ({ type: types.SET_USERNAME, username }),
 
-  turnCard: () => ({ type: types.TURN_CARD }),
+  turnCard: id => ({ type: types.TURN_CARD, id }),
   turnCardSuccess: payload => ({ type: types.TURN_CARD_SUCCESS, payload }),
   turnCardError: error => ({ type: types.TURN_CARD_ERROR, error }),
 
@@ -32,6 +32,8 @@ const cards = cardGenerator();
 const initialState = fromJS({
   username: "",
   score: 0,
+  firstGuess: null,
+  secondGuess: null,
   cards: cards,
   error: null,
   loading: false

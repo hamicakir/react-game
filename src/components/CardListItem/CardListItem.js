@@ -1,14 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import styles from './CardListItem.module.scss';
+import styles from "./CardListItem.module.scss";
 
-function CardListItem({item}) {
-  const { imgUrl } = item;
+function CardListItem({ item, turnCard }) {
+  const { id, imgUrl, turned } = item;
   return (
-    <div className={styles.item}>
-      <img src={imgUrl} />
+    <div className={styles.item} onClick={() => turnCard(id)}>
+      <div className={styles.flipped}>
+        <img className={turned ? styles.active : styles.passive} src={imgUrl} />
+      </div>
     </div>
-  )
+  );
 }
 
 export default CardListItem;

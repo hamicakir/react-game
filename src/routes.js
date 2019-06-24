@@ -1,5 +1,7 @@
 import { lazy } from 'react';
 
+import LazyLoad from './hoc/LazyLoad';
+
 import Home from './pages/Home';
 
 const Game = lazy(() => import('./pages/Game'));
@@ -14,13 +16,13 @@ export default [
   },
   {
     key: "Game",
-    component: Game,
+    component: LazyLoad(Game),
     exact: true,
     path: "/game"
   },
   {
     key: "NotFound",
-    component: NotFound,
+    component: LazyLoad(NotFound),
     exact: false,
     path: "*"
   }

@@ -7,11 +7,12 @@ export function* userName({ username }) {
   yield put(actions.setUserName(username));
 }
 
-export function* turnCard() {
+export function* turnCard({ id }) {
   try {
+    console.log("ID", id);
     yield put(actions.turnCardSuccess());
   } catch (error) {
-    yield put(actions.turnCardSuccess(error));
+    yield put(actions.turnCardError(error));
   }
 }
 
