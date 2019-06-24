@@ -5,21 +5,16 @@ import { createStructuredSelector } from "reselect";
 import CardList from "../../components/CardList";
 
 import styles from "./Game.module.scss";
-import { actions, makeSelectGameData } from "../../reducers/gameReducer";
+import {actions, makeSelectGameData} from "../../reducers/gameReducer";
 
 class Game extends Component {
-  render() {
+  render(): React.ReactElement<any> {
     const {
       gameData: { cards },
       turnCard
     } = this.props;
-    console.log("GAME_CARDS", cards);
 
-    return (
-      <div className={styles.wrapper}>
-        {cards && <CardList cards={cards} turnCard={turnCard} />}
-      </div>
-    );
+    return <div className={styles.wrapper}>{cards && <CardList cards={cards} turnCard={turnCard} />}</div>;
   }
 }
 
@@ -30,7 +25,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = dispatch => {
   return {
     turnCard: id => dispatch(actions.turnCard(id))
-  };
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
