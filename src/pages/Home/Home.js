@@ -18,7 +18,6 @@ class Home extends Component {
   };
 
   startGame = () => {
-    console.log("Clicked");
     const { setUser, history: { push } } = this.props;
     const { username } = this.state;
 
@@ -29,7 +28,6 @@ class Home extends Component {
   };
 
   render() {
-    console.log("PROPS", this.props);
     return (
       <>
         <Header />
