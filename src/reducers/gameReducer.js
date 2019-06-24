@@ -29,8 +29,6 @@ export const actions = {
 
 const cards = cardGenerator();
 
-console.log("CARDS", cards);
-
 const initialState = fromJS({
   username: "",
   score: 0,

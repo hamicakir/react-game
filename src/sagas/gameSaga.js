@@ -1,18 +1,11 @@
 // @flow
-import { call, select, put, takeLatest, takeEvery } from "redux-saga/effects";
-import { get } from "immutable";
+import { put, takeLatest, take } from "redux-saga/effects";
 
 import { actions, types } from "../reducers/gameReducer";
 
-export function* setUser({ username }) {
-  console.log("Params", username);
-  try {
-    yield put(actions.setUserName(username));
-  } catch (error) {
-    console.log(error);
-  }
+export function* userName({ username }) {
+  yield put(actions.setUserName(username));
 }
-
 
 export function* turnCard() {
   try {
@@ -33,5 +26,5 @@ export function* removeItem() {
 export default [
   takeLatest(types.TURN_CARD, turnCard),
   takeLatest(types.REMOVE_ITEM_LOADING, removeItem),
-  takeEvery(types.SET_USERNAME, setUser)
+  take(types.SET_USERNAME, userName)
 ];
